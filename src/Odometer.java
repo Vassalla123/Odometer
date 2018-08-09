@@ -3,13 +3,18 @@ import java.util.ArrayList;
 public class Odometer {
 	int digits;
 	public ArrayList<Integer> validReadings;
-	public final int lowestReadings[]={1,12,123,1234,12345,123456,1234567,12345678};
-	public final int highestReadings[]={9,89,789,6789,56789,456789,3456789,23456789};
 	public Odometer(int digits)
 	{
 		this.digits=digits;
 		validReadings=new ArrayList<Integer>();
-		for(int i=lowestReadings[digits-1];i<=highestReadings[digits-1];i++)
+		String lowestReadings="";
+		String highestReadings="";
+		for(int i=1;i<=digits;i++)
+		{
+			lowestReadings=lowestReadings+Integer.toString(i);
+			highestReadings=highestReadings+Integer.toString(10-i);
+		}
+		for(int i=Integer.parseInt(lowestReadings);i<=Integer.parseInt(highestReadings);i++)
 		{
 			if(isValid(i))
 			{
@@ -39,7 +44,7 @@ public class Odometer {
 		
 			return validReadings.get(validReadings.size()-1);
 	}
-	public int nextReading(int reading,int n)
+	public int nextNthReading(int reading,int n)
 	{
 		for(int i=0;i<n;i++)
 		{
@@ -47,7 +52,7 @@ public class Odometer {
 		}
 		return reading;
 	}
-	public int prevReading(int reading,int n)
+	public int prevNthReading(int reading,int n)
 	{
 		for(int i=0;i<n;i++)
 		{
@@ -82,7 +87,7 @@ public class Odometer {
 //			System.out.println(a);
 //		}
 		//System.out.println(odometer.difference(1234,5678));
-		System.out.println(odometer.prevReading(1234));
+		System.out.println(odometer.prevNthReading(1236,3));
 		System.out.println(odometer.nextReading(6789));
 
 	}
